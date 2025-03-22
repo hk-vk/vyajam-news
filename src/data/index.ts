@@ -10,6 +10,7 @@ import { moreTechArticles } from './moreTechArticles';
 import { moreGlobalArticles } from './moreGlobalArticles';
 import { moreSportsArticles } from './moreSportsArticles';
 import { entertainmentArticles } from './entertainmentArticles';
+import { technologyArticles } from './technologyArticles';
 
 // Combine all articles into a single array
 export const allArticles: Article[] = [
@@ -21,6 +22,8 @@ export const allArticles: Article[] = [
   ...moreGlobalArticles,
   ...moreSportsArticles,
   ...entertainmentArticles,
+,
+  ...technologyArticles
 ];
 
 // Map of articles by category
@@ -51,4 +54,12 @@ export {
   moreGlobalArticles,
   moreSportsArticles,
   entertainmentArticles,
+};
+
+// Map articles by category
+export const articlesByCategory = {
+  politics: politicsArticles,
+  technology: technologyArticles
+,
+  global: globalArticles
 };

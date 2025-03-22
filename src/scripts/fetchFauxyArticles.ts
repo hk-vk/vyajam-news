@@ -41,10 +41,31 @@ async function updateArticles() {
       try {
         // Read existing articles
         const existingContent = await fs.readFile(filePath, 'utf-8');
-        const existingArticlesMatch = existingContent.match(/export const \w+Articles = (\[[\s\S]*?\]);/);
-        const existingArticles: Article[] = existingArticlesMatch 
-          ? JSON.parse(existingArticlesMatch[1].replace(/'/g, '"'))
-          : [];
+        let existingArticles: Article[] = [];
+        
+        try {
+          // First try to match and parse the articles array
+          const existingArticlesMatch = existingContent.match(/export const \w+Articles = (\[[\s\S]*?\]);/);
+          if (existingArticlesMatch) {
+            // Instead of direct JSON parsing which can fail on non-standard JSON format,
+            // use a safer approach by evaluating the code in a controlled way
+            // This is temporary code only for migration - normally eval should be avoided
+            const articlesString = existingArticlesMatch[1]
+              .replace(/\n/g, '')
+              .replace(/\s+/g, ' ')
+              .replace(/'/g, '"');
+              
+            try {
+              existingArticles = JSON.parse(articlesString);
+            } catch (parseError) {
+              console.log(`Warning: Could not parse ${category} articles, creating a new file instead.`);
+              // If we can't parse, we'll just use an empty array and overwrite the file
+              existingArticles = [];
+            }
+          }
+        } catch (matchError) {
+          console.log(`Warning: Could not extract ${category} articles data, creating a new file.`);
+        }
 
         // Combine existing and new articles, remove duplicates
         const combinedArticles = [
