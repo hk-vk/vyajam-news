@@ -51,11 +51,7 @@ export function NewsDetailPage() {
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
 
-      <div className="mb-12 p-4 border-l-4 border-primary bg-gray-50">
-        <p className="text-lg font-medium text-gray-700">
-          ഇതൊരു നിർമ്മിത ലേഖനമാണ്.
-        </p>
-      </div>
+
 
       <div className="mt-12 border-t pt-6">
         <Link to="/" className="text-primary hover:underline">

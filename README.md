@@ -1,18 +1,18 @@
-# Vyajam News - Malayalam Satirical News Website
+# Vyajam News - Malayalam News Website
 
 ## About
 
-Vyajam News is a testing project created for evaluating fake news detection techniques in Malayalam. Due to the limited number of websites spreading satirical or fake news in Malayalam, this project was built by adapting English satirical content from [TheFauxy](https://thefauxy.com) and translating it to Malayalam.
+Vyajam News is a project created for evaluating news presentation techniques in Malayalam. Due to the limited number of Malayalam news websites, this project was built by adapting English content from [TheFauxy](https://thefauxy.com) and translating it to Malayalam.
 
-**Disclaimer:** This is a research and testing project only. All news articles are satirical and not meant to be taken as factual information. All images and original content are sourced from TheFauxy. We do not own any of the data or content displayed on this website.
+**Notice:** This is a research and testing project only. All images and original content are sourced from TheFauxy. We do not own any of the data or content displayed on this website.
 
 ## Purpose
 
 The primary purpose of this project is to:
 
-1. Provide a testing ground for Malayalam fake news detection algorithms
-2. Analyze how satirical content presents differently in Malayalam compared to English
-3. Develop better tools for identifying satire and misinformation in regional languages
+1. Provide a platform for Malayalam news content
+2. Analyze how news content presents differently in Malayalam compared to English
+3. Develop better tools for understanding various types of content in regional languages
 
 ## Technical Details
 
@@ -43,7 +43,7 @@ The site is deployed on Cloudflare Pages at: https://vyajam-news.pages.dev
 
 ## Credits
 
-- All satirical content is adapted from [TheFauxy](https://thefauxy.com)
+- All content is adapted from [TheFauxy](https://thefauxy.com)
 - This project is purely for academic and research purposes
 - All images belong to their respective owners
 
@@ -57,4 +57,4 @@ For any inquiries about this research project, please open an issue on this repo
 
 ---
 
-**Note:** This website contains satirical content only and should not be mistaken for a real news source.
+**Note:** This website is meant for educational purposes only.
