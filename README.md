@@ -1,50 +1,60 @@
-# React + TypeScript + Vite
+# Vyajam News - Malayalam Satirical News Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
 
-Currently, two official plugins are available:
+Vyajam News is a testing project created for evaluating fake news detection techniques in Malayalam. Due to the limited number of websites spreading satirical or fake news in Malayalam, this project was built by adapting English satirical content from [TheFauxy](https://thefauxy.com) and translating it to Malayalam.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Disclaimer:** This is a research and testing project only. All news articles are satirical and not meant to be taken as factual information. All images and original content are sourced from TheFauxy. We do not own any of the data or content displayed on this website.
 
-## Expanding the ESLint configuration
+## Purpose
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The primary purpose of this project is to:
 
-- Configure the top-level `parserOptions` property like this:
+1. Provide a testing ground for Malayalam fake news detection algorithms
+2. Analyze how satirical content presents differently in Malayalam compared to English
+3. Develop better tools for identifying satire and misinformation in regional languages
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Technical Details
+
+This project is built with:
+
+- React + TypeScript
+- Vite for fast builds
+- TailwindCSS for styling
+- React Router for navigation
+- Deployed on Cloudflare Pages
+
+## Running Locally
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start the development server
+pnpm dev
+
+# Build for production
+pnpm build
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Deployment
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The site is deployed on Cloudflare Pages at: https://vyajam-news.pages.dev
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Credits
+
+- All satirical content is adapted from [TheFauxy](https://thefauxy.com)
+- This project is purely for academic and research purposes
+- All images belong to their respective owners
+
+## License
+
+This project is for educational purposes only. The content is not meant for commercial use.
+
+## Contact
+
+For any inquiries about this research project, please open an issue on this repository.
+
+---
+
+**Note:** This website contains satirical content only and should not be mistaken for a real news source.

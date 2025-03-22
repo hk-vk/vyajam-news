@@ -1,0 +1,20 @@
+[site]
+bucket = "./dist"
+entry-point = "."
+
+[build]
+command = "pnpm run build"
+output_dir = "dist"
+
+[build.upload]
+format = "directory"
+
+[site.dev]
+directory = "dist"
+
+# Specify the build output directory for Pages
+pages_build_output_dir = "dist"
+
+[[routes]]
+pattern = "/*"
+script = "index.html" 
