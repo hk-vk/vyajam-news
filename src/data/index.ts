@@ -22,7 +22,6 @@ export const allArticles: Article[] = [
   ...moreGlobalArticles,
   ...moreSportsArticles,
   ...entertainmentArticles,
-,
   ...technologyArticles
 ];
 
@@ -54,12 +53,4 @@ export {
   moreGlobalArticles,
   moreSportsArticles,
   entertainmentArticles,
-};
-
-// Map articles by category
-export const articlesByCategory = {
-  politics: politicsArticles,
-  technology: technologyArticles
-,
-  global: globalArticles
 };
