@@ -26,26 +26,68 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
 
     for (const result of searchResults.results) {
       try {
-        // Get full content of the article using getContents
-        const content = await exa.getContents(
-          [result.url],
-          {
-            text: true,
-            html: false
-          }
-        );
+        console.log(`Processing article: ${result.title} - ${result.url}`);
         
-        if (!content.results?.[0]) {
-          console.error('No content found for article:', result.url);
+        let articleContent = "";
+        let imageUrl = result.image || "";
+        
+        // Try to fetch content directly first
+        try {
+          const response = await axios.get(result.url, {
+            timeout: 10000,
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+          });
+          
+          // Basic content extraction from HTML
+          const html = response.data;
+          
+          // Extract main content (basic approach)
+          const bodyMatch = /<body[^>]*>([\s\S]*?)<\/body>/i.exec(html);
+          if (bodyMatch && bodyMatch[1]) {
+            // Remove scripts, styles, and HTML tags
+            articleContent = bodyMatch[1]
+              .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+              .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+              .replace(/<[^>]*>/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+          
+          // Try to find image if not available
+          if (!imageUrl) {
+            const imgMatch = /<img[^>]+src="([^">]+)"/i.exec(html);
+            if (imgMatch && imgMatch[1]) {
+              imageUrl = imgMatch[1];
+              // Convert relative URLs to absolute
+              if (imageUrl.startsWith('/')) {
+                const urlObj = new URL(result.url);
+                imageUrl = `${urlObj.protocol}//${urlObj.host}${imageUrl}`;
+              }
+            }
+          }
+        } catch (fetchError) {
+          console.log(`Direct fetch failed, using search snippet: ${fetchError.message}`);
+        }
+        
+        // If direct fetch failed, use the search snippet
+        if (!articleContent && result.snippet) {
+          articleContent = result.snippet;
+        }
+        
+        // If still no content, skip this article
+        if (!articleContent) {
+          console.error('No content could be extracted for article:', result.url);
           continue;
         }
 
         // Extract relevant information
         const article: FauxyArticle = {
           title: result.title || '',
-          content: content.results[0].text || '',
-          imageUrl: result.image || '',
-          category: determineCategory(content.results[0].text || ''),
+          content: articleContent,
+          imageUrl: imageUrl,
+          category: determineCategory(articleContent),
           date: new Date().toLocaleDateString('ml-IN', {
             year: 'numeric',
             month: 'long',
@@ -68,6 +110,8 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
           author: 'Fauxy Bot',
           imageSrc: article.imageUrl
         });
+        
+        console.log(`Successfully processed article: ${article.title}`);
       } catch (error) {
         console.error('Error processing article:', error);
         continue;
@@ -83,8 +127,19 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
 
 async function translateToMalayalam(text: string): Promise<string> {
   try {
-    const result = await translate(text, { to: 'ml' });
-    return result.text;
+    // If text is too long, split it into smaller chunks for translation
+    if (text.length > 5000) {
+      const chunks = [];
+      for (let i = 0; i < text.length; i += 5000) {
+        const chunk = text.slice(i, i + 5000);
+        const translatedChunk = await translate(chunk, { to: 'ml' });
+        chunks.push(translatedChunk.text);
+      }
+      return chunks.join(' ');
+    } else {
+      const result = await translate(text, { to: 'ml' });
+      return result.text;
+    }
   } catch (error) {
     console.error('Translation error:', error);
     return text;
@@ -93,17 +148,17 @@ async function translateToMalayalam(text: string): Promise<string> {
 
 function determineCategory(content: string): string {
   const categories = {
-    politics: ['politics', 'government', 'election', 'minister', 'party'],
-    technology: ['tech', 'AI', 'software', 'digital', 'computer'],
-    sports: ['cricket', 'football', 'sport', 'player', 'match'],
-    entertainment: ['movie', 'actor', 'film', 'celebrity', 'entertainment'],
-    global: ['world', 'international', 'global', 'foreign', 'country']
+    politics: ['politics', 'government', 'election', 'minister', 'party', 'president', 'PM', 'parliament'],
+    technology: ['tech', 'AI', 'software', 'digital', 'computer', 'internet', 'app', 'smartphone'],
+    sports: ['cricket', 'football', 'sport', 'player', 'match', 'game', 'tournament', 'team'],
+    entertainment: ['movie', 'actor', 'film', 'celebrity', 'entertainment', 'music', 'TV', 'show'],
+    global: ['world', 'international', 'global', 'foreign', 'country', 'nation', 'diplomatic']
   };
 
   const contentLower = content.toLowerCase();
   
   for (const [category, keywords] of Object.entries(categories)) {
-    if (keywords.some(keyword => contentLower.includes(keyword))) {
+    if (keywords.some(keyword => contentLower.includes(keyword.toLowerCase()))) {
       return category;
     }
   }
