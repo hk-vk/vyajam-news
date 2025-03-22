@@ -1,0 +1,20 @@
+[images]
+  remote_images = [
+    "https://source.unsplash.com/.*",
+    "https://images.unsplash.com/.*",
+    "https://ext.same-assets.com/*",
+    "https://ugc.same-assets.com/.*",
+    "https://www.keele.ac.uk/about/news/2025/january/artificial-intelligence/fake-news-detector-960.jpg",
+    "https://i.ytimg.com/vi/U6ieiJAhXQ4/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/O6LL2OkiANU/maxresdefault.jpg",
+    "https://media.licdn.com/dms/image/v2/C5612AQEXkdRat0Olrw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1612247891089*"
+  ]
+
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
