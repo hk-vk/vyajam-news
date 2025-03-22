@@ -3,32 +3,32 @@ import { Article } from './types';
 export const globalArticles: Article[] = [
   {
     id: 'naked-gender-reveal',
-    title: 'Man Arrested for Attending Gender Reveal Party Naked, Claims Misunderstanding',
-    excerpt: 'A Florida man took gender reveal too literally, showing up naked at a party thinking everyone was supposed to reveal their own gender.',
+    title: 'ലിംഗ വെളിപ്പെടുത്തൽ പാർട്ടിയിൽ നഗ്നനായി പങ്കെടുത്ത മനുഷ്യൻ അറസ്റ്റിലായി, തെറ്റിദ്ധാരണ ആണെന്ന് അവകാശപ്പെട്ടു',
+    excerpt: 'ഫ്ലോറിഡയിലെ ഒരു മനുഷ്യൻ ലിംഗ വെളിപ്പെടുത്തൽ വളരെ അക്ഷരാർത്ഥത്തിൽ എടുത്തു, എല്ലാവരും അവരുടെ സ്വന്തം ലിംഗം വെളിപ്പെടുത്തണമെന്ന് കരുതി പാർട്ടിയിൽ നഗ്നനായി എത്തി.',
     category: 'global',
-    date: 'May 27, 2024',
-    author: 'Fauxy News',
+    date: 'മെയ് 27, 2024',
+    author: 'അനിൽ കുമാർ',
     imageSrc: 'https://thefauxy.com/wp-content/uploads/2024/05/gender.png',
-    content: 'In a bizarre incident in Florida, a man took things too literally and showed up naked at a gender reveal party, believing it was an event for everyone to reveal their own gender. Tim Roth, a US college graduate, thought it was a party where people revealed their current genders, "as everyone is changing their genders these days." The sight of him, especially in front of children, horrified everyone. His brother, who is a gender fluid person, also arrived naked, with makeup on half of his face and a beard on the other half. The police were called immediately, and he was arrested on the spot. His lawyer argued in court that the man was only guilty of being stupid, which is not a crime in the USA.'
+    content: 'ഫ്ലോറിഡയിൽ നടന്ന ഒരു വിചിത്രമായ സംഭവത്തിൽ, ഒരു മനുഷ്യൻ കാര്യങ്ങൾ വളരെ അക്ഷരാർത്ഥത്തിൽ എടുത്ത് ലിംഗ വെളിപ്പെടുത്തൽ പാർട്ടിയിൽ നഗ്നനായി എത്തി, എല്ലാവരും അവരുടെ നിലവിലെ ലിംഗം വെളിപ്പെടുത്തുന്ന ഒരു പരിപാടിയാണെന്ന് വിശ്വസിച്ചു. ടിം റോത്ത് എന്ന യുഎസ് കോളേജ് ബിരുദധാരി, "ഈ കാലത്ത് എല്ലാവരും അവരുടെ ലിംഗം മാറ്റുന്നതിനാൽ" ജനങ്ങൾ അവരുടെ നിലവിലെ ലിംഗം വെളിപ്പെടുത്തുന്ന ഒരു പാർട്ടിയാണെന്ന് കരുതി. പ്രത്യേകിച്ച് കുട്ടികളുടെ മുന്നിൽ, അദ്ദേഹത്തിന്റെ കാഴ്ച എല്ലാവരെയും ഭയപ്പെടുത്തി. ലിംഗദ്രവത്വമുള്ള അദ്ദേഹത്തിന്റെ സഹോദരനും നഗ്നനായി എത്തി, മുഖത്തിന്റെ പകുതിയിൽ മേക്കപ്പും മറുപകുതിയിൽ താടിയുമായി. പോലീസിനെ ഉടൻ വിളിച്ചു, അദ്ദേഹം സ്ഥലത്തുവച്ച് അറസ്റ്റിലായി. കോടതിയിൽ അദ്ദേഹത്തിന്റെ അഭിഭാഷകൻ വാദിച്ചത്, മനുഷ്യൻ വിഡ്ഢിയായതിന് മാത്രമാണ് കുറ്റക്കാരൻ, അത് യുഎസ്എയിൽ കുറ്റകരമല്ല എന്നാണ്.'
   },
   {
     id: 'doctor-tumor-card-decline',
-    title: 'Doctor Returns Tumor After Patient\'s Card Declines',
-    excerpt: 'A North Carolina surgeon put a tumor back into a patient after their credit card was declined at the payment desk.',
+    title: 'രോഗിയുടെ കാർഡ് ഡിക്ലൈൻ ആയതിന് ശേഷം ഡോക്ടർ ട്യൂമർ തിരികെ വച്ചു',
+    excerpt: 'നോർത്ത് കരോലിനയിലെ ഒരു സർജൻ രോഗിയുടെ ക്രെഡിറ്റ് കാർഡ് പേയ്മെന്റ് ഡെസ്കിൽ ഡിക്ലൈൻ ആയതിന് ശേഷം ട്യൂമർ തിരികെ വച്ചു.',
     category: 'global',
     date: 'May 22, 2024',
     author: 'Fauxy News',
     imageSrc: 'https://thefauxy.com/wp-content/uploads/2024/05/hospital.jpg',
-    content: 'In a bizarre incident from North Carolina, a doctor, after two hours of rigorous surgery, removed a tumor from a patient\'s body only to put it back. Surgeon Mc Clover was disappointed with the patient\'s excuse of his card declining at the payment desk. So, he asked him to lie down on the bed for some "formality" and then put the tumor back in another two-hour-long surgery session. Not only this, but he also added the expense for the second surgery to his bill. The patient went to seek police help, where the police offered him something to drink to calm him down. When paying for the drinks, his card declined again, and he was taken into custody.'
+    content: 'നോർത്ത് കരോലിനയിൽ നിന്നുള്ള ഒരു വിചിത്രമായ സംഭവത്തിൽ, രണ്ട് മണിക്കൂർ നീണ്ട കഠിനമായ ശസ്ത്രക്രിയയ്ക്ക് ശേഷം ഒരു രോഗിയുടെ ശരീരത്തിൽ നിന്ന് ട്യൂമർ നീക്കം ചെയ്ത ഡോക്ടർ അത് തിരികെ വച്ചു. പേയ്മെന്റ് ഡെസ്കിൽ രോഗിയുടെ കാർഡ് ഡിക്ലൈൻ ആയതിന്റെ ഒഴികഴിവിൽ സർജൻ മക് ക്ലോവർ നിരാശനായി. അതിനാൽ, അദ്ദേഹം രോഗിയോട് "ഔപചാരികത"യ്ക്കായി കിടക്കയിൽ കിടക്കാൻ ആവശ്യപ്പെടുകയും മറ്റൊരു രണ്ട് മണിക്കൂർ നീണ്ട ശസ്ത്രക്രിയയിലൂടെ ട്യൂമർ തിരികെ വയ്ക്കുകയും ചെയ്തു. ഇത് മാത്രമല്ല, രണ്ടാമത്തെ ശസ്ത്രക്രിയയുടെ ചെലവും അദ്ദേഹം ബില്ലിൽ ചേർത്തു. രോഗി പോലീസിന്റെ സഹായം തേടി പോയി, അവിടെ പോലീസ് അദ്ദേഹത്തെ ശാന്തനാക്കാൻ കുടിക്കാൻ എന്തെങ്കിലും വാഗ്ദാനം ചെയ്തു. പാനീയങ്ങൾക്ക് പണം നൽകുമ്പോൾ, അദ്ദേഹത്തിന്റെ കാർഡ് വീണ്ടും ഡിക്ലൈൻ ആയി, അദ്ദേഹത്തെ കസ്റ്റഡിയിലെടുത്തു.'
   },
   {
     id: 'himachal-toilet-tax',
-    title: 'Congress Devises Toilet Seat Sharing Formula After Toilet Tax Implementation',
-    excerpt: 'Himachal Pradesh government introduces innovative toilet seat sharing program to help residents cope with new toilet tax.',
+    title: 'ടോയ്‌ലറ്റ് നികുതി നടപ്പിലാക്കിയതിന് ശേഷം കോൺഗ്രസ് ടോയ്‌ലറ്റ് സീറ്റ് പങ്കിടൽ ഫോർമുല രൂപീകരിച്ചു',
+    excerpt: 'പുതിയ ടോയ്‌ലറ്റ് നികുതിയുമായി പൊരുത്തപ്പെടാൻ നിവാസികളെ സഹായിക്കുന്നതിന് ഹിമാചൽ പ്രദേശ് സർക്കാർ നൂതന ടോയ്‌ലറ്റ് സീറ്റ് പങ്കിടൽ പരിപാടി അവതരിപ്പിച്ചു.',
     category: 'global',
     date: 'October 4, 2024',
     author: 'Fauxy News',
     imageSrc: 'https://thefauxy.com/wp-content/uploads/2024/10/Rahul-Himachal.png',
-    content: 'Following the implementation of a ₹25 per toilet tax in Himachal Pradesh, the Congress government has devised an innovative toilet seat-sharing formula. According to the new formula, people can save taxes by sharing a toilet. Two people can use it at the same time, facing opposite directions, or use it one after the other but flush only once, which will also save on the water bill. The President of the Congress Toilet Seat Sharing Committee said, "We want \'Muhabbat ki dukaan\' in Himachal. People will love each other more if they share the toilet together because \'sharing is caring.\'" In response to Congress\'s formula, Himachal Pradesh residents have devised their own free formula and have started open defecation.'
+    content: 'ഹിമാചൽ പ്രദേശിൽ ടോയ്‌ലറ്റിന് 25 രൂപ നികുതി നടപ്പിലാക്കിയതിന് ശേഷം, കോൺഗ്രസ് സർക്കാർ ഒരു നൂതന ടോയ്‌ലറ്റ് സീറ്റ് പങ്കിടൽ ഫോർമുല രൂപീകരിച്ചു. പുതിയ ഫോർമുല പ്രകാരം, ജനങ്ങൾക്ക് ടോയ്‌ലറ്റ് പങ്കിട്ട് നികുതി ലാഭിക്കാം. രണ്ട് പേർക്ക് വിപരീത ദിശകളിൽ അഭിമുഖീകരിച്ച് ഒരേ സമയം ഉപയോഗിക്കാം, അല്ലെങ്കിൽ ഒന്നിന് പിറകെ മറ്റൊന്ന് ഉപയോഗിക്കാം, പക്ഷേ ഒരിക്കൽ മാത്രം ഫ്ലഷ് ചെയ്യുക, ഇത് വെള്ളക്കരത്തിലും ലാഭിക്കാൻ സഹായിക്കും. കോൺഗ്രസ് ടോയ്‌ലറ്റ് സീറ്റ് പങ്കിടൽ കമ്മിറ്റിയുടെ പ്രസിഡന്റ് പറഞ്ഞു, "ഞങ്ങൾ ഹിമാചലിൽ \'മുഹബ്ബത് കി ദുകാൻ\' ആഗ്രഹിക്കുന്നു. \'പങ്കിടൽ എന്നാൽ കരുതൽ\' ആയതിനാൽ ജനങ്ങൾ ടോയ്‌ലറ്റ് ഒരുമിച്ച് പങ്കിടുമ്പോൾ പരസ്പരം കൂടുതൽ സ്നേഹിക്കും." കോൺഗ്രസിന്റെ ഫോർമുലയ്ക്ക് മറുപടിയായി, ഹിമാചൽ പ്രദേശിലെ നിവാസികൾ അവരുടെ സ്വന്തം സൗജന്യ ഫോർമുല രൂപീകരിച്ചു, തുറസ്സായ മലമൂത്ര വിസർജ്ജനം ആരംഭിച്ചു.'
   }
 ];
