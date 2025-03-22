@@ -1,10 +1,14 @@
 import axios from 'axios';
-import { translate } from '@vitalets/google-translate-api';
+import { translate as googleTranslate } from '@vitalets/google-translate-api';
 import { Article } from '../data/types';
 import Exa from 'exa-js';
+import translate from 'translate';
 
 // Flag to use mock translator when rate limited
 const USE_MOCK_TRANSLATOR = true;
+
+// Flag to use alternate translation service if Google fails
+const USE_ALTERNATE_TRANSLATOR = true;
 
 // Mock Malayalam words to use for development
 const MOCK_MALAYALAM_WORDS = [
@@ -175,8 +179,19 @@ async function translateToMalayalam(text: string): Promise<string> {
           await delay(2000); // 2 seconds delay between chunks
         }
       } catch (error) {
-        console.error('Translation error for chunk:', error);
-        chunks.push(mockTranslate(chunk)); // Use mock translation if real translation fails
+        console.error('Translation error for chunk, trying alternate translator:', error);
+        if (USE_ALTERNATE_TRANSLATOR) {
+          // Try alternate translation service
+          try {
+            const alternateTranslated = await alternateTranslate(chunk);
+            chunks.push(alternateTranslated);
+          } catch (alternateError) {
+            console.error('Alternate translation failed, using mock:', alternateError);
+            chunks.push(mockTranslate(chunk)); // Use mock translation if real translation fails
+          }
+        } else {
+          chunks.push(mockTranslate(chunk)); // Use mock translation if real translation fails
+        }
       }
     }
     return chunks.join(' ');
@@ -184,9 +199,34 @@ async function translateToMalayalam(text: string): Promise<string> {
     try {
       return await translateWithRetry(text, maxRetries);
     } catch (error) {
-      console.error('Translation error:', error);
-      return mockTranslate(text); // Use mock translation if real translation fails
+      console.error('Translation error, trying alternate translator:', error);
+      if (USE_ALTERNATE_TRANSLATOR) {
+        // Try alternate translation service
+        try {
+          return await alternateTranslate(text);
+        } catch (alternateError) {
+          console.error('Alternate translation failed, using mock:', alternateError);
+          return mockTranslate(text); // Use mock translation if real translation fails
+        }
+      } else {
+        return mockTranslate(text); // Use mock translation if real translation fails
+      }
     }
+  }
+}
+
+// Alternative translation service
+async function alternateTranslate(text: string): Promise<string> {
+  // Configure the translate library
+  translate.engine = 'google';
+  translate.key = '';
+  
+  try {
+    const result = await translate(text, { to: 'ml' });
+    return result;
+  } catch (error) {
+    console.error('Alternate translation error:', error);
+    throw error;
   }
 }
 
@@ -220,7 +260,7 @@ async function translateWithRetry(text: string, maxRetries: number): Promise<str
         await delay(delayMs);
       }
       
-      const result = await translate(text, { to: 'ml' });
+      const result = await googleTranslate(text, { to: 'ml' });
       return result.text;
     } catch (error: any) {
       console.log(`Translation attempt ${attempt+1} failed:`, error.message);
