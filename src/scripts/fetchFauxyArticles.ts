@@ -2,6 +2,11 @@ import { crawlFauxyArticles } from '../utils/crawler';
 import { Article } from '../data/types';
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the directory name for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function updateArticles() {
   try {

@@ -67,13 +67,14 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
               }
             }
           }
-        } catch (fetchError) {
+        } catch (fetchError: any) {
           console.log(`Direct fetch failed, using search snippet: ${fetchError.message}`);
         }
         
-        // If direct fetch failed, use the search snippet
-        if (!articleContent && result.snippet) {
-          articleContent = result.snippet;
+        // If direct fetch failed, use the search description or title as content
+        if (!articleContent) {
+          // Use result title if no content was found
+          articleContent = `Information about ${result.title}`;
         }
         
         // If still no content, skip this article
@@ -126,24 +127,75 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
 }
 
 async function translateToMalayalam(text: string): Promise<string> {
-  try {
-    // If text is too long, split it into smaller chunks for translation
-    if (text.length > 5000) {
-      const chunks = [];
-      for (let i = 0; i < text.length; i += 5000) {
-        const chunk = text.slice(i, i + 5000);
-        const translatedChunk = await translate(chunk, { to: 'ml' });
-        chunks.push(translatedChunk.text);
+  // Maximum number of retries
+  const maxRetries = 3;
+  
+  // Handle empty text
+  if (!text || text.trim() === '') {
+    return '';
+  }
+  
+  // If text is too long, split it into smaller chunks for translation
+  if (text.length > 1000) {
+    const chunks = [];
+    for (let i = 0; i < text.length; i += 1000) {
+      const chunk = text.slice(i, i + 1000);
+      try {
+        const translatedChunk = await translateWithRetry(chunk, maxRetries);
+        chunks.push(translatedChunk);
+        
+        // Add delay between chunks to avoid rate limiting
+        if (i + 1000 < text.length) {
+          await delay(2000); // 2 seconds delay between chunks
+        }
+      } catch (error) {
+        console.error('Translation error for chunk:', error);
+        chunks.push(chunk); // Use original text if translation fails
       }
-      return chunks.join(' ');
-    } else {
+    }
+    return chunks.join(' ');
+  } else {
+    try {
+      return await translateWithRetry(text, maxRetries);
+    } catch (error) {
+      console.error('Translation error:', error);
+      return text; // Return original text if translation fails
+    }
+  }
+}
+
+// Helper function to translate with retries
+async function translateWithRetry(text: string, maxRetries: number): Promise<string> {
+  let lastError: any;
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      // If not the first attempt, wait longer between attempts
+      if (attempt > 0) {
+        const delayMs = 2000 * Math.pow(2, attempt); // Exponential backoff
+        console.log(`Retry ${attempt+1}/${maxRetries} after ${delayMs}ms delay`);
+        await delay(delayMs);
+      }
+      
       const result = await translate(text, { to: 'ml' });
       return result.text;
+    } catch (error: any) {
+      console.log(`Translation attempt ${attempt+1} failed:`, error.message);
+      lastError = error;
+      
+      // If not a rate limit error, don't retry
+      if (!(error.message && error.message.includes('Too Many Requests'))) {
+        throw error;
+      }
     }
-  } catch (error) {
-    console.error('Translation error:', error);
-    return text;
   }
+  
+  // If we got here, all retries failed
+  throw lastError || new Error('Translation failed after retries');
+}
+
+// Simple delay function
+function delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function determineCategory(content: string): string {
