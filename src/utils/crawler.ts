@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { translate } from '@vitalets/google-translate-api';
 import { Article } from '../data/types';
+import Exa from 'exa-js';
 
 interface FauxyArticle {
   title: string;
@@ -12,11 +13,11 @@ interface FauxyArticle {
 
 export async function crawlFauxyArticles(): Promise<Article[]> {
   try {
-    // Initialize Exa client
-    const exa = new Exa(process.env.EXA_API_KEY);
+    // Initialize Exa client with your API key
+    const exa = new Exa("f719f358-7ec7-4098-9c0f-07698598b95e");
     
     // Search for recent articles from thefauxy.com
-    const searchResults = await exa.search('site:thefauxy.com', {
+    const searchResults = await exa.search("site:thefauxy.com", {
       numResults: 20,
       useAutoprompt: false
     });
@@ -25,15 +26,26 @@ export async function crawlFauxyArticles(): Promise<Article[]> {
 
     for (const result of searchResults.results) {
       try {
-        // Get full content of the article
-        const content = await exa.getContent(result.url);
+        // Get full content of the article using getContents
+        const content = await exa.getContents(
+          [result.url],
+          {
+            text: true,
+            html: false
+          }
+        );
         
+        if (!content.results?.[0]) {
+          console.error('No content found for article:', result.url);
+          continue;
+        }
+
         // Extract relevant information
         const article: FauxyArticle = {
-          title: result.title,
-          content: content.text,
-          imageUrl: content.image || result.image || '',
-          category: determineCategory(content.text),
+          title: result.title || '',
+          content: content.results[0].text || '',
+          imageUrl: result.image || '',
+          category: determineCategory(content.results[0].text || ''),
           date: new Date().toLocaleDateString('ml-IN', {
             year: 'numeric',
             month: 'long',
