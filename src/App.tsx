@@ -4,6 +4,7 @@ import { HomePage } from './pages/HomePage';
 import { CategoryPage } from './pages/CategoryPage';
 import { AboutPage } from './pages/AboutPage';
 import { NewsDetailPage } from './pages/NewsDetailPage';
+import TheFauxyCrawler from './components/TheFauxyCrawler';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/crawler" element={<TheFauxyCrawler />} />
           <Route path="/:category" element={<CategoryPage />} />
           <Route path="/:category/:slug" element={<NewsDetailPage />} />
         </Routes>
